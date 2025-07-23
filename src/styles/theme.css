@@ -13,15 +13,47 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: var(--pink-bg);
   color: var(--dark-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content at the top */
+  align-items: center;
+  min-height: 100vh; /* Ensure the body takes up the full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
-h1, h2, h3, h4, h5, h6 {
+
+/* Center Alignment */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content at the top */
+  padding: 20px; /* Add padding for better spacing */
+  min-height: 100vh; /* Ensure the container takes up the full viewport height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Welcome Text Styling */
+.welcome-text {
+  font-size: 2.5rem;
+  font-weight: bold;
   color: var(--dark-text);
-  font-family: 'Arial', sans-serif;
+  margin-top: 20px; /* Add spacing from the logo */
+  text-align: center; /* Center the text */
 }
 
+/* Logo Styling */
+.logo {
+  width: 400px; /* Adjusted size for better alignment */
+  height: auto;
+  margin-bottom: 20px; /* Space between logo and text */
+}
+
+/* Button Styling */
 button {
   font-size: 1rem;
+  padding: 10px 20px;
+  margin: 10px;
   font-weight: bold;
   border: none;
   border-radius: 8px;
@@ -55,6 +87,10 @@ button:hover {
   padding: 30px;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Card Class */
@@ -64,20 +100,8 @@ button:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 16px;
   margin-bottom: 16px;
-}
-
-/* Logo Styling */
-.logo {
-  width: 80px; /* Adjusted size for smaller logos */
-  height: auto;
-  margin-bottom: 20px;
-}
-
-/* Center Alignment */
-.center {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
 }

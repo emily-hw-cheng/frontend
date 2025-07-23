@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGlobalData } from '../../context/GlobalDataContext';
+import { getAllMenuItems } from '../../services/api';
 
 export default function Menu() {
-  const { menuItems } = useGlobalData(); // Get menu items from GlobalDataContext
-  const [cart, setCart] = useState([]); // State to manage cart items
-  const navigate = useNavigate(); // Navigation hook
+  const [menuItems, setMenuItems] = useState([]);
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        const data = await getAllMenuItems();
+        setMenuItems(data);
+      } catch (error) {
+        console.error('Error fetching menu items:', error);
+      }
+    };
+    fetchMenuItems();
+  }, []);
 
   const handleAddToCart = (item) => {
     const existingItem = cart.find(cartItem => cartItem.id === item.id);
@@ -16,12 +28,7 @@ export default function Menu() {
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
     }
-    // Update URL to indicate success
     navigate('/customer/menu?status=item-added-successfully');
-  };
-
-  const handleBackToDashboard = () => {
-    navigate('/customer/dashboard');
   };
 
   const handleProceedToOrder = () => {
@@ -32,6 +39,10 @@ export default function Menu() {
     navigate('/customer/place-order', { state: { cart } });
   };
 
+  const handleBackToDashboard = () => {
+    navigate('/customer/dashboard');
+  };
+
   return (
     <div className="p-8">
       <h2 className="text-3xl font-bold mb-6">Menu Items</h2>
@@ -40,7 +51,7 @@ export default function Menu() {
           <li key={item.id} className="border-b py-4 flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <img
-                src={item.image} // Use the image property directly
+                src={item.image}
                 alt={item.name}
                 className="w-16 h-16 object-cover rounded"
               />

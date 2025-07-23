@@ -4,6 +4,10 @@ import '../../styles/theme.css'; // Import global styles
 
 export default function AdminDashboard() {
   const navigate = useNavigate(); // Define navigate using useNavigate
+  
+  const handleBackToHome = () => {
+    navigate('/'); // Adjust the path to your home page route
+  };
 
   return (
     <div className="p-8">
@@ -39,6 +43,14 @@ export default function AdminDashboard() {
         >
           Sales Overview
         </button>
+
+        <button
+        className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded mt-4"
+        onClick={handleBackToHome}
+      >
+        Back to Home Page
+      </button>
+      
       </div>
     </div>
   );

@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Confetti from 'react-confetti'; // Import Confetti
 import '../styles/theme.css'; // Import global styles
 
 export default function Home() {
   const navigate = useNavigate();
+  const [showConfetti, setShowConfetti] = useState(true); // State to control confetti
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-pink-100">
+    <div className="center bg-pink-100">
+      {showConfetti && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false} // Confetti pops once
+          numberOfPieces={300} // Adjust number of confetti pieces
+        />
+      )}
       <img
         src="/images/logo.png"
         alt="Frosted Corner Logo"
-        className="w-32 h-32 mb-6" // Reduced size of the logo
+        className="logo mb-6"
       />
-      <h1 className="text-4xl font-bold mb-8" style={{ color: 'mintgreen' }}>
+      <h1 className="welcome-text mb-8">
         Welcome to Frosted Corner
       </h1>
       <div className="flex space-x-8">
+
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded"
+          className="bg-green hover:bg-green-accent text-white py-2 px-6 rounded"
           onClick={() => navigate('/login')}
         >
           Login
         </button>
         <button
-          className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded"
+          className="bg-red hover:bg-red-highlight text-white py-2 px-6 rounded"
           onClick={() => navigate('/register')}
         >
           Register

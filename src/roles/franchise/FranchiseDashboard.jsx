@@ -5,6 +5,10 @@ export default function FranchiseDashboard() {
   const { franchiseId } = useParams();
   const navigate = useNavigate();
 
+  const handleBackToHome = () => {
+    navigate('/'); // Adjust the path to your home page route
+  };
+
   return (
     <div className="p-8">
       <h2 className="text-3xl font-bold mb-6">Franchise Dashboard - ID: {franchiseId}</h2>
@@ -25,6 +29,13 @@ export default function FranchiseDashboard() {
         onClick={() => navigate(`/franchise/${franchiseId}/view-menu-items`)}
       >
         View Menu Items
+      </button>
+
+      <button
+        className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded mt-4"
+        onClick={handleBackToHome}
+      >
+        Back to Home Page
       </button>
     </div>
   );

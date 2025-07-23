@@ -3,10 +3,13 @@ const API_BASE_URL = '/api/menu'; // Replace with your actual API endpoint
 export async function getMenuItems() {
   try {
     const response = await fetch(`${API_BASE_URL}/items`);
+    console.log('API Response:', response); // Debugging log
     if (!response.ok) {
       throw new Error('Failed to fetch menu items');
     }
-    return await response.json();
+    const data = await response.json();
+    console.log('Menu Items:', data); // Debugging log
+    return data;
   } catch (error) {
     console.error('Error fetching menu items:', error);
     return [];

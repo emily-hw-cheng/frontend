@@ -1,7 +1,8 @@
 // Mock database of users
 const mockUsers = [
   { email: 'admin@frosted.com', password: 'a1', role: 'admin' },
-  { email: 'franchise@frosted.com', password: 'f1', role: 'franchise' },
+  { email: 'franchise1@frosted.com', password: 'f1', role: 'franchise', franchiseId: 1 },
+  { email: 'franchise2@frosted.com', password: 'f2', role: 'franchise', franchiseId: 2 },
   { email: 'customer@frosted.com', password: 'c1', role: 'customer' },
 ];
 
@@ -17,7 +18,7 @@ const simulateApiDelay = (ms) => new Promise((resolve) => setTimeout(resolve, ms
  * @throws {Error} - If the credentials are invalid.
  */
 export const loginUser = async ({ email, password }) => {
-  await simulateApiDelay(500); // Simulate API delay
+  await simulateApiDelay(200); // Simulate API delay
 
   const user = mockUsers.find((u) => u.email === email && u.password === password);
 
@@ -27,8 +28,11 @@ export const loginUser = async ({ email, password }) => {
     throw new Error('Invalid email or password');
   }
 
-  localStorage.setItem('token', 'mock-token');
+  localStorage.setItem('isAuthenticated', 'true');
   localStorage.setItem('userRole', user.role);
+  if (user.role === 'franchise') {
+    localStorage.setItem('franchiseId', user.franchiseId); // Save franchiseId for franchise users
+  }
 
   return user;
 };

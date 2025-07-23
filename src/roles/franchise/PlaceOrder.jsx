@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useGlobalData } from '../../context/GlobalDataContext';
 
 export default function PlaceOrder() {
-  const { supplies } = useGlobalData();
+  const { supplies, orderSupply } = useGlobalData(); // Use orderSupply to update supplies
   const [order, setOrder] = useState([]);
 
   const handleAddToOrder = (supply) => {
@@ -16,15 +16,17 @@ export default function PlaceOrder() {
     }
   };
 
-  const handleRemoveFromOrder = (id) => {
-    setOrder(order.filter(item => item.id !== id));
+  const handlePlaceOrder = () => {
+    order.forEach(item => {
+      orderSupply(item.id, item.quantity); // Update supply quantities in GlobalDataContext
+    });
+    setOrder([]);
+    alert('Order placed successfully!');
   };
 
   return (
     <div className="p-8">
       <h2 className="text-3xl font-bold mb-6">Place Order</h2>
-
-      {/* Supplies List */}
       <div className="mb-8">
         <h3 className="text-2xl font-semibold mb-4">Available Supplies</h3>
         <ul>
@@ -44,8 +46,6 @@ export default function PlaceOrder() {
           ))}
         </ul>
       </div>
-
-      {/* Order Summary */}
       <div>
         <h3 className="text-2xl font-semibold mb-4">Order Summary</h3>
         <ul>
@@ -55,15 +55,15 @@ export default function PlaceOrder() {
                 <h4 className="font-bold">{item.name}</h4>
                 <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
               </div>
-              <button
-                className="text-red-600 hover:bg-red-100 px-3 py-1 rounded"
-                onClick={() => handleRemoveFromOrder(item.id)}
-              >
-                Remove
-              </button>
             </li>
           ))}
         </ul>
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4"
+          onClick={handlePlaceOrder}
+        >
+          Place Order
+        </button>
       </div>
     </div>
   );

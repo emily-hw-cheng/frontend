@@ -1,12 +1,17 @@
 import React from 'react';
 import { useGlobalData } from '../../context/GlobalDataContext';
+import { useParams } from 'react-router-dom';
 
 export default function ViewMenuItems() {
-  const { menuItems } = useGlobalData();
+  const { franchiseId } = useParams(); // Get franchiseId from route params
+  const { menuItems } = useGlobalData(); // Get menu items from GlobalDataContext
+
+  console.log('Franchise ID:', franchiseId); // Debugging log
+  console.log('Menu Items:', menuItems); // Debugging log
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6">View Menu Items</h2>
+      <h2 className="text-3xl font-bold mb-6">Menu Items - Franchise ID: {franchiseId}</h2>
       <ul>
         {menuItems.map(item => (
           <li key={item.id} className="border-b py-4 flex justify-between items-center">
@@ -20,9 +25,7 @@ export default function ViewMenuItems() {
               )}
               <div>
                 <h4 className="font-bold">{item.name}</h4>
-                <p className="text-sm text-gray-600">{item.description}</p>
-                <p className="text-sm text-gray-500">Dietary: {item.dietaryRestrictions}</p>
-                <p className="text-sm text-gray-800 font-semibold">${item.price}</p>
+                <p className="text-sm text-gray-600">${item.price}</p>
               </div>
             </div>
           </li>

@@ -4,6 +4,8 @@ import React, { createContext, useState, useContext } from 'react';
 const GlobalDataContext = createContext();
 
 export function GlobalDataProvider({ children }) {
+  
+  // Initial data for menu items
   const [menuItems, setMenuItems] = useState([
     { id: 1, name: 'Chocolate Chip Cookie', price: 3.99, image: '/images/cc_cookie.png', description: 'A classic cookie with chocolate chips.', dietaryRestrictions: 'Contains gluten, dairy' },
     { id: 2, name: 'Vanilla Cake', price: 5.99, image: '/images/vanilla_cake.png', description: 'A moist vanilla-flavored cake.', dietaryRestrictions: 'Contains gluten, dairy, eggs' },
@@ -17,6 +19,7 @@ export function GlobalDataProvider({ children }) {
     { id: 10, name: 'Tiramisu', price: 7.99, image: '/images/tiramisu.png', description: 'A classic Italian dessert with coffee flavor.', dietaryRestrictions: 'Contains gluten, dairy, eggs' },
   ]);
 
+  // Initial data for supplies
   const [supplies, setSupplies] = useState([
     { id: 1, name: 'Paper Bowls', quantity: 100 },
     { id: 2, name: 'Paper Cups', quantity: 200 },
@@ -30,6 +33,17 @@ export function GlobalDataProvider({ children }) {
     { id: 10, name: 'Gloves', quantity: 100 },
     { id: 11, name: 'Aprons', quantity: 50 },
     { id: 12, name: 'Hairnets', quantity: 30 },
+  ]);
+
+    // Initial data for franchises
+  const [franchises, setFranchises] = useState([
+    { id: 1, name: 'Franchise 1', location: 'New York', lat: 40.7128, lng: -74.0060 },
+    { id: 2, name: 'Franchise 2', location: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
+  ]);
+
+  const [dessertOrders, setDessertOrders] = useState([
+    { franchiseId: 1, dessert: 'Chocolate Chip Cookie', votes: 120 },
+    { franchiseId: 2, dessert: 'Vanilla Cake', votes: 95 },
   ]);
 
   const addMenuItem = (newItem) => {
@@ -48,13 +62,27 @@ export function GlobalDataProvider({ children }) {
     setSupplies(supplies.filter(supply => supply.id !== id));
   };
 
+
+  
   return (
-    <GlobalDataContext.Provider value={{ menuItems, supplies, addMenuItem, removeMenuItem, addSupply, removeSupply }}>
+    <GlobalDataContext.Provider
+      value={{
+        menuItems,
+        supplies,
+        franchises,
+        dessertOrders,
+        addMenuItem,
+        removeMenuItem,
+        addSupply,
+        removeSupply,
+      }}
+    >
       {children}
     </GlobalDataContext.Provider>
   );
 }
 
+// Custom hook to use the GlobalDataContext
 export function useGlobalData() {
   return useContext(GlobalDataContext);
 }

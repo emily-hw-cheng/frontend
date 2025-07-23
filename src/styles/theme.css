@@ -1,0 +1,83 @@
+/* Color Palette */
+:root {
+  --pink-bg: #FAD4D4;
+  --green-accent: #6ccca5;
+  --red-highlight: #E94E77;
+  --white-text: #FFFFFF;
+  --dark-text: #7b0a0a;
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--pink-bg);
+  color: var(--dark-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-text);
+  font-family: 'Arial', sans-serif;
+}
+
+button {
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+/* Background Classes */
+.bg-green {
+  background-color: var(--green-accent);
+  color: var(--white-text);
+}
+
+.bg-red {
+  background-color: var(--red-highlight);
+  color: var(--white-text);
+}
+
+.bg-white {
+  background-color: var(--white-text);
+  color: var(--dark-text);
+}
+
+/* Container Class */
+.container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Class */
+.card {
+  background-color: var(--white-text);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Logo Styling */
+.logo {
+  width: 80px; /* Adjusted size for smaller logos */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Center Alignment */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

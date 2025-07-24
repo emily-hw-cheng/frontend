@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getFranchiseOrdersById } from '../../services/api'; // Import API function
+import { fetchFranchiseOrders } from '../../services/api'; // Import API function
 import { Bar } from 'react-chartjs-2'; // Import Bar chart
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -19,9 +19,9 @@ export default function SalesOverview() {
     }
     setLoading(true);
     try {
-      const orders = await getFranchiseOrdersById(franchiseId);
+      const orders = await fetchFranchiseOrders(franchiseId); // Use the correct function
       setSalesData(orders);
-
+  
       // Calculate total sales
       const sales = orders.reduce((sum, order) => sum + order.total, 0);
       setTotalSales(sales);

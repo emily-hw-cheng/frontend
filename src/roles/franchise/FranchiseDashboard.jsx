@@ -11,7 +11,7 @@ export default function FranchiseDashboard() {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6">Franchise Dashboard - ID: {franchiseId}</h2>
+      <h2 className="text-3xl font-bold mb-6">Franchise Dashboard</h2>
       <button
         className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mb-4"
         onClick={() => navigate(`/franchise/${franchiseId}/view-supplies`)}
@@ -30,12 +30,17 @@ export default function FranchiseDashboard() {
       >
         View Menu Items
       </button>
-
+      <button
+        className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded"
+        onClick={() => navigate(`/franchise/${franchiseId}/allcust`)}
+      >
+        Manage Customer Information
+      </button>
       <button
         className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded mt-4"
         onClick={handleBackToHome}
       >
-        Back to Home Page
+        Logout
       </button>
     </div>
   );

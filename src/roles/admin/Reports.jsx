@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { getFranchiseOrdersById } from '../../services/api'; // Import API function
-import { Line } from 'react-chartjs-2'; // Import Line chart
+import { fetchFranchiseOrders } from '../../services/api';
+import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
-// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export default function Reports() {
   const [franchiseId, setFranchiseId] = useState('');
   const [franchiseOrders, setFranchiseOrders] = useState([]);
-  const [totalSales, setTotalSales] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const handleFetchFranchiseReports = async () => {
@@ -19,12 +17,8 @@ export default function Reports() {
     }
     setLoading(true);
     try {
-      const orders = await getFranchiseOrdersById(franchiseId);
+      const orders = await fetchFranchiseOrders(franchiseId);
       setFranchiseOrders(orders);
-
-      // Calculate total sales
-      const sales = orders.reduce((sum, order) => sum + order.total, 0);
-      setTotalSales(sales);
     } catch (error) {
       console.error('Error fetching franchise reports:', error);
       alert('Failed to fetch franchise reports.');
@@ -33,17 +27,21 @@ export default function Reports() {
     }
   };
 
-  // Prepare data for the line chart
+  // Prepare data for the line chart (showing order count per date)
+  const orderCountByDate = franchiseOrders.reduce((acc, order) => {
+    acc[order.date] = (acc[order.date] || 0) + 1;
+    return acc;
+  }, {});
   const chartData = {
-    labels: franchiseOrders.map(order => order.date), // Use order dates as labels
+    labels: Object.keys(orderCountByDate),
     datasets: [
       {
-        label: 'Total Sales ($)',
-        data: franchiseOrders.map(order => order.total), // Use order totals as data
+        label: 'Total Orders',
+        data: Object.values(orderCountByDate),
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderWidth: 2,
-        tension: 0.4, // Smooth curve
+        tension: 0.4,
       },
     ],
   };
@@ -71,17 +69,16 @@ export default function Reports() {
       ) : (
         <>
           <h3 className="text-2xl font-semibold mt-6">Summary</h3>
-          <p><strong>Total Sales:</strong> ${totalSales.toFixed(2)}</p>
+          <p><strong>Total Orders:</strong> {franchiseOrders.length}</p>
 
-          <h3 className="text-2xl font-semibold mt-6">Sales Trend</h3>
+          <h3 className="text-2xl font-semibold mt-6">Orders Trend</h3>
           <Line data={chartData} options={{ responsive: true, plugins: { legend: { position: 'top' } } }} />
 
-          <h3 className="text-2xl font-semibold mt-6">Order Details</h3>
+
           <ul>
             {franchiseOrders.map((order, index) => (
               <li key={index} className="border-b py-2">
                 <p><strong>Order ID:</strong> {order.id}</p>
-                <p><strong>Total:</strong> ${order.total}</p>
                 <p><strong>Date:</strong> {order.date}</p>
               </li>
             ))}

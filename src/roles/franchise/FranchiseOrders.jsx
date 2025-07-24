@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchFranchiseOrders, addFranchiseItem, removeFranchiseItem } from '../../services/api';
 
-export default function FranchiseOrders) {
+export default function FranchiseOrders() {
   const navigate = useNavigate();
   const franchiseId = localStorage.getItem('franchiseID'); // Retrieve franchise ID from localStorage
   const [orders, setOrders] = useState([]);

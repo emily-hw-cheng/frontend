@@ -48,7 +48,7 @@ export default function AdminDashboard() {
         className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded mt-4"
         onClick={handleBackToHome}
       >
-        Back to Home Page
+        Logout
       </button>
       
       </div>

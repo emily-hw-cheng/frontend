@@ -37,13 +37,21 @@ export function GlobalDataProvider({ children }) {
 
     // Initial data for franchises
   const [franchises, setFranchises] = useState([
-    { id: 1, name: 'Franchise 1', location: 'New York', lat: 40.7128, lng: -74.0060 },
-    { id: 2, name: 'Franchise 2', location: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
+    { id: 1, name: 'Frosted Corner COL', location: 'Columbia', lat: 34.0007, lng: -81.0348 },      // Columbia, SC
+    { id: 2, name: 'Frosted Corner CHI', location: 'Chicago', lat: 41.8781, lng: -87.6298 },       // Chicago, IL
+    { id: 3, name: 'Frosted Corner ATL', location: 'Atlanta', lat: 33.7490, lng: -84.3880 },       // Atlanta, GA
+    { id: 4, name: 'Frosted Corner LA', location: 'Los Angeles', lat: 34.0522, lng: -118.2437 },   // Los Angeles, CA
+    { id: 5, name: 'Frosted Corner NY', location: 'New York', lat: 40.7128, lng: -74.0060 },       // New York, NY
+    { id: 6, name: 'Frosted Corner AZ', location: 'Tempe', lat: 33.4255, lng: -111.9400 },  
   ]);
 
   const [dessertOrders, setDessertOrders] = useState([
     { franchiseId: 1, dessert: 'Chocolate Chip Cookie', votes: 120 },
     { franchiseId: 2, dessert: 'Vanilla Cake', votes: 95 },
+    { franchiseId: 3, dessert: 'Tiramisu', votes: 95 },
+    { franchiseId: 4, dessert: 'Strawberry Cupcake', votes: 20 },
+    { franchiseId: 5, dessert: 'Mango Milkshake', votes: 75 },
+    { franchiseId: 6, dessert: 'Fruit Tart', votes: 15 },
   ]);
 
   const addMenuItem = (newItem) => {

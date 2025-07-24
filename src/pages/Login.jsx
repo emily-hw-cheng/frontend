@@ -36,13 +36,18 @@ export default function Login() {
         throw new Error('Invalid email or password');
       }
 
+      // Save customer ID to localStorage if role is customer
+      if (user.role === 'customer') {
+        localStorage.setItem('custID', user.id);
+      }
+
       // Navigate based on user role
       if (user.role === 'franchise') {
         navigate(`/franchise/${user.id}/dashboard`);
       } else if (user.role === 'admin') {
         navigate('/admin/dashboard');
       } else if (user.role === 'customer') {
-        navigate('/customer/dashboard');
+        navigate('/customer/select-franchise');
       }
     } catch (err) {
       console.error(err); // Debugging log
@@ -75,7 +80,7 @@ export default function Login() {
         className="register-button bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4"
         onClick={() => navigate('/register')}
       >
-        Register
+        Sign Up
       </button>
     </div>
   );

@@ -10,8 +10,10 @@ import FranchiseDashboard from './roles/franchise/FranchiseDashboard';
 import ViewSupplies from './roles/franchise/ViewSupplies';
 import PlaceOrder from './roles/franchise/PlaceOrder';
 import ViewMenuItems from './roles/franchise/ViewMenuItems';
+import AllCust from './roles/franchise/AllCust';
 import CustDashboard from './roles/customer/CustDashboard';
 import Menu from './roles/customer/Menu';
+import SelectFranchise from './roles/customer/SelectFranchise';
 import ToCart from './roles/customer/ToCart';
 import CustPlaceOrder from './roles/customer/CustPlaceOrder';
 import UserProfile from './roles/customer/UserProfile';
@@ -58,15 +60,17 @@ function App() {
           <Route path="/franchise/:franchiseId/view-supplies" element={<ViewSupplies />} />
           <Route path="/franchise/:franchiseId/place-order" element={<PlaceOrder />} />
           <Route path="/franchise/:franchiseId/view-menu-items" element={<ViewMenuItems />} />
+          <Route path="/franchise/:franchiseId/allcust" element={<AllCust />} />
 
           {/* Customer Routes */}
+          <Route path="/customer/select-franchise" element={<SelectFranchise />} />
           <Route path="/customer/dashboard" element={<CustDashboard />} />
           <Route path="/customer/menu" element={<Menu />} />
           <Route path="/customer/to-cart" element={<ToCart />} />
           <Route path="/customer/place-order" element={<CustPlaceOrder />} />
           <Route path="/customer/user-profile" element={<UserProfile />} />
           <Route path="/customer/franchise-leaderboard" element={<FranchiseLeaderboard />} />
-          <Route path="/customer/view-orders" element={<ViewOrders />} />
+          {<Route path="/customer/view-orders" element={<ViewOrders />} />}
         </Routes>
       </Router>
     </GlobalDataProvider>

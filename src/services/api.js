@@ -1,67 +1,22 @@
 import axios from 'axios';
 
 // Base URL for the backend API
-const API_BASE_URL = 'frostedcornerapi-bzf8ekb8d0d7hped.centralus-01.azurewebsites.net/api'; // Replace with your actual backend URL
+const API_BASE_URL = 'https://frostedcornerapi-bzf8ekb8d0d7hped.centralus-01.azurewebsites.net/api';
 
-// Add a new menu item
-export const addMenuItem = async (menuItemData) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/menu-items`, menuItemData);
-      return response.data;
-    } catch (error) {
-      console.error('Error adding menu item:', error);
-      throw error;
-    }
-  };
-
-// Delete menu item by ID
-export const deleteMenuItemById = async (itemId) => {
-    try {
-      const response = await axios.delete(`${API_BASE_URL}/menu-items/${itemId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error deleting menu item:', error);
-      throw error;
-    }
-  };
-
-// Fetch all menu items
-export const getAllMenuItems = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/menu-items`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching menu items:', error);
-      throw error;
-    }
-  };  
-
-// Fetch orders for a specific customer
-export const fetchCustomerOrders = async (customerId) => {
+// Order Endpoints
+export const getAllOrders = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/orders/customer/${customerId}`);
+    const response = await axios.get(`${API_BASE_URL}/Order`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching customer orders:', error);
-    throw error;
-    }
-};
-
-// Fetch orders for a specific franchise
-export const fetchFranchiseOrders = async (franchiseId) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/orders/franchise/${franchiseId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching franchise orders:', error);
+    console.error('Error fetching all orders:', error);
     throw error;
   }
 };
 
-// Create a new order
 export const createOrder = async (orderData) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/orders`, orderData);
+    const response = await axios.post(`${API_BASE_URL}/Order`, orderData);
     return response.data;
   } catch (error) {
     console.error('Error creating order:', error);
@@ -69,146 +24,193 @@ export const createOrder = async (orderData) => {
   }
 };
 
-// Get franchise details by franchise ID
-export const getFranchiseById = async (franchiseId) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/franchise/${franchiseId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching franchise details:', error);
-      throw error;
-    }
-  }
-  
-// Add a new franchise
-export const addFranchise = async (franchiseData) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/franchise`, franchiseData);
-      return response.data;
-    } catch (error) {
-      console.error('Error adding franchise:', error);
-      throw error;
-    }
-  }
-  
-// Add an item to a franchise
-export const addFranchiseItem = async (franchiseId, itemData) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/franchise/${franchiseId}/items`, itemData);
-      return response.data;
-    } catch (error) {
-      console.error('Error adding item to franchise:', error);
-      throw error;
-    }
-  }
-  
-// Remove an item from a franchise
-export const removeFranchiseItem = async (franchiseId, itemId) => {
-    try {
-      const response = await axios.delete(`${API_BASE_URL}/franchise/${franchiseId}/items/${itemId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error removing item from franchise:', error);
-      throw error;
-    }
-}
-    
-
-// Get all orders
-export const getAllOrders = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/orders`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching all orders:', error);
-      throw error;
-    }
-  };
-  
-// Get order by ID
 export const getOrderById = async (orderId) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/orders/${orderId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching order by ID:', error);
-      throw error;
-    }
-  };
-  
-// Add franchise ID to an order
-export const addFranchiseIdToOrder = async (orderId, franchiseId) => {
-    try {
-      const response = await axios.patch(`${API_BASE_URL}/orders/${orderId}/franchise`, { franchiseId });
-      return response.data;
-    } catch (error) {
-      console.error('Error adding franchise ID to order:', error);
-      throw error;
-    }
-  };
-  
-  // Add customer ID to an order
-export const addCustomerIdToOrder = async (orderId, customerId) => {
-    try {
-      const response = await axios.patch(`${API_BASE_URL}/orders/${orderId}/customer`, { customerId });
-      return response.data;
-    } catch (error) {
-      console.error('Error adding customer ID to order:', error);
-      throw error;
-    }
-};
-  
-  // Add items to an order
-  export const addOrderItems = async (orderId, items) => {
-    try {
-      const response = await axios.patch(`${API_BASE_URL}/orders/${orderId}/items`, { items });
-      return response.data;
-    } catch (error) {
-      console.error('Error adding items to order:', error);
-      throw error;
-    }
-};
-  
-  // Add delivery address to an order
-  export const addDeliveryAddressToOrder = async (orderId, deliveryAddress) => {
-    try {
-      const response = await axios.patch(`${API_BASE_URL}/orders/${orderId}/delivery-address`, { deliveryAddress });
-      return response.data;
-    } catch (error) {
-      console.error('Error adding delivery address to order:', error);
-      throw error;
-    }
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Order/${orderId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching order by ID:', error);
+    throw error;
+  }
 };
 
-// Add a menu item globally
-export const addMenuItemToBackend = async (menuItemData) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/menu-items`, menuItemData);
-      return response.data;
-    } catch (error) {
-      console.error('Error adding menu item to backend:', error);
-      throw error;
-    }
-};
-  
-  // Remove a menu item globally
-  export const removeMenuItemFromBackend = async (itemId) => {
-    try {
-      const response = await axios.delete(`${API_BASE_URL}/menu-items/${itemId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error removing menu item from backend:', error);
-      throw error;
-    }
+export const fetchCustomerOrder = async (customerId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Order/customer/${customerId}`);
+    // Always return a single order object
+    return response.data.data || response.data;
+  } catch (error) {
+    console.error('Error fetching customer order:', error);
+    throw error;
+  }
 };
 
-// Fetch franchise orders by ID
-export const getFranchiseOrdersById = async (franchiseId) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/orders/franchise/${franchiseId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching franchise orders:', error);
-      throw error;
-    }
-  };
+export const fetchFranchiseOrders = async (franchiseId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Order/franchise/${franchiseId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching franchise orders:', error);
+    throw error;
+  }
+};
+
+// Supplies Endpoints
+export const getAllSupplies = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Supplies`);
+    return response.data.data; // Correct: returns the array
+  } catch (error) {
+    console.error('Error fetching supplies:', error);
+    throw error;
+  }
+};
+
+export const createSupply = async (supplyData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/Supplies`, supplyData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating supply:', error);
+    throw error;
+  }
+};
+
+// Franchise Endpoints
+export const getAllFranchises = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Franchise`);
+    return response.data.data; // <-- Only the array!
+  } catch (error) {
+    console.error('Error fetching franchises:', error);
+    throw error;
+  }
+};
+
+export const addFranchise = async (franchiseData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/Franchise/addFranchise`, franchiseData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding franchise:', error);
+    throw error;
+  }
+};
+
+
+export const addFranchiseItem = async (franchiseId, itemId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/Franchise/addItem/${franchiseId}/${itemId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding franchise item:', error);
+    throw error;
+  }
+};
+
+export const addItemToAllFranchises = async (itemId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/Franchise/addToAllFranchises/${itemId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding item to all franchises:', error);
+    throw error;
+  }
+};
+
+export const editFranchiseItem = async (editData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/Franchise/editItem`, {
+      FranchiseId: editData.FranchiseId,
+      FranchiseItemId: editData.FranchiseItemId,
+      ItemId: editData.ItemId,
+      CustomColor: editData.CustomColor,
+      CustomPrice: editData.CustomPrice
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error editing franchise item:', error);
+    throw error;
+  }
+};
+
+export const getFranchiseById = async (franchiseId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Franchise/${franchiseId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching franchise details:', error);
+    throw error;
+  }
+};
+
+// Item Endpoints
+export const getAllItems = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Item`);
+    return response.data.data; // <-- Fix: use .data.data
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    throw error;
+  }
+};
+
+export const addItem = async (itemData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/Item`, itemData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding item:', error);
+    throw error;
+  }
+};
+
+export const getItemById = async (itemId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Item/${itemId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching item by ID:', error);
+    throw error;
+  }
+};
+
+export const deleteItemById = async (itemId) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/Item/${itemId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting item by ID:', error);
+    throw error;
+  }
+};
+
+export const getItemsByType = async (type) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Item/type/${type}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching items by type:', error);
+    throw error;
+  }
+};
+
+// Delete a franchise-specific menu item by ID
+export const deleteFranchiseItemById = async (itemId) => {
+  try {
+    await axios.delete(`${API_BASE_URL}/Item/${itemId}`);
+  } catch (error) {
+    console.error('Error deleting franchise item:', error);
+    throw error;
+  }
+};
+
+export const fetchCustomerOrders = async (customerId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/Order/customer/${customerId}`);
+    return response.data.data || response.data;
+  } catch (error) {
+    console.error('Error fetching customer orders:', error);
+    throw error;
+  }
+};

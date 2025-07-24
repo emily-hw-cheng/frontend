@@ -19,8 +19,8 @@ export const createOrder = async (orderData) => {
     const response = await axios.post(`${API_BASE_URL}/Order`, orderData);
     return response.data;
   } catch (error) {
-    console.error('Error creating order:', error);
-    throw error;
+    console.error('Error placing order:', error);
+    alert('Failed to place order. Please try again.');
   }
 };
 
@@ -117,12 +117,11 @@ export const addItemToAllFranchises = async (itemId) => {
     throw error;
   }
 };
-
+/*
 export const editFranchiseItem = async (editData) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/Franchise/editItem`, {
       FranchiseId: editData.FranchiseId,
-      FranchiseItemId: editData.FranchiseItemId,
       ItemId: editData.ItemId,
       CustomColor: editData.CustomColor,
       CustomPrice: editData.CustomPrice
@@ -132,7 +131,15 @@ export const editFranchiseItem = async (editData) => {
     console.error('Error editing franchise item:', error);
     throw error;
   }
-};
+};*/
+
+export async function editFranchiseItem(payload) {
+  return axios.post(
+    'https://frostedcornerapi-bzf8ekb8d0d7hped.centralus-01.azurewebsites.net/api/Franchise/editItem',
+    payload,
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+}
 
 export const getFranchiseById = async (franchiseId) => {
   try {

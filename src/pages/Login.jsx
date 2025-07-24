@@ -43,7 +43,7 @@ export default function Login() {
 
       // Navigate based on user role
       if (user.role === 'franchise') {
-        navigate(`/franchise/${user.id}/dashboard`);
+        navigate(`/franchise/8/dashboard`);
       } else if (user.role === 'admin') {
         navigate('/admin/dashboard');
       } else if (user.role === 'customer') {

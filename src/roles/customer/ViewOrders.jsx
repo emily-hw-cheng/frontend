@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { fetchFranchiseOrders } from '../../services/api';
+import { fetchCustomerOrder } from '../../services/api';
 
 export default function ViewOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Get franchiseId from localStorage
-  const franchiseId = localStorage.getItem('franchiseId');
+  // Get customerId from localStorage
+  const customerId = localStorage.getItem('custID');
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        if (!franchiseId) {
-          setError('Franchise ID not found. Please select a franchise.');
+        if (!customerId) {
+          setError('Customer ID not found. Please log in again.');
           setLoading(false);
           return;
         }
-        const response = await fetchFranchiseOrders(franchiseId);
-        setOrders(response.data || response); // Adjust based on your API response
+        // Fetch orders for this customer
+        const response = await fetchCustomerOrder(customerId);
+        setOrders(Array.isArray(response) ? response : response.data);
       } catch (err) {
         setError('Failed to fetch orders.');
       } finally {
@@ -27,7 +28,7 @@ export default function ViewOrders() {
     };
 
     fetchOrders();
-  }, [franchiseId]);
+  }, [customerId]);
 
   if (loading) return <p>Loading orders...</p>;
   if (error) return <p>{error}</p>;
@@ -42,7 +43,18 @@ export default function ViewOrders() {
               <p><strong>Order ID:</strong> {order.orderId}</p>
               <p><strong>Date:</strong> {order.time}</p>
               <p><strong>Total:</strong> ${order.total}</p>
-              {/* Add more order details as needed */}
+              <div className="ml-4">
+                <strong>Items:</strong>
+                <ul>
+                  {(order.orderItems || []).map((item, idx) => (
+                    <li key={item.franchiseItemId || idx}>
+                      Item Name: {item.itemName}
+                      Quantity: {item.quantity}
+                      Subtotal: {item.subTotal}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </li>
           ))}
         </ul>

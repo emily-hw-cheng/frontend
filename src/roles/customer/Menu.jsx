@@ -26,6 +26,7 @@ export default function Menu() {
               description: fi.item.description,
               price: fi.customPrice ?? fi.item.price,
               image: fi.item.imageId ? `/images/${fi.item.imageId}` : '',
+              customColor: fi.customColor,
               dietaryRestrictions: fi.item.dietaryRestrictions,
             }))
           : [];
@@ -67,16 +68,20 @@ export default function Menu() {
         {Array.isArray(menuItems) && menuItems.length > 0 ? (
           menuItems.map((item) => (
             <li key={item.id} className="border p-4 rounded shadow-lg">
-              <img
-                src={item.image || 'https://via.placeholder.com/150'}
-                alt={item.name}
-                className="w-full h-40 object-cover mb-4 rounded"
-              />
+              {/* Removed image */}
               <h4 className="font-bold text-lg">{item.name}</h4>
               <p className="text-sm text-gray-600">{item.description}</p>
+              {item.customColor && item.customColor.trim() !== '' && (
+                <p className="text-sm text-gray-600">Color: {item.customColor}</p>
+              )}
               <p className="text-sm text-gray-800 font-semibold">${item.price}</p>
-              {item.dietaryRestrictions && (
-                <p className="text-sm text-gray-500">Dietary: {item.dietaryRestrictions}</p>
+
+              {Array.isArray(item.dietaryRestrictions) && item.dietaryRestrictions.length > 0 && (
+                <p className="text-sm text-gray-500">
+                  Dietary Restrictions: {item.dietaryRestrictions.map((restriction) => (
+                    <span>{restriction.name}</span>
+                  ))}
+                </p>
               )}
               <button
                 className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-4"

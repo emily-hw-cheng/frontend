@@ -28,17 +28,20 @@ export default function CustPlaceOrder() {
         return;
       }
 
+      // Debug: log cart contents
+      console.log('Cart before order:', cart);
+
       const orderData = {
-        FranchiseId: franchiseId,
-        CustomerId: custID,
-        OrderItems: cart.map(item => ({
-          FranchiseItemId: item.id,
-          Quantity: item.quantity
+        franchiseId: franchiseId,
+        customerId: custID,
+        orderItems: cart.map(item => ({
+          franchiseItemId: item.id,
+          quantity: item.quantity,
         })),
-        Address: orderType === 'Delivery' ? deliveryAddress : '',
+        address: orderType === 'Delivery' ? deliveryAddress : '',
       };
 
-      console.log('Order payload:', orderData); // Debug
+      console.log('Order payload:', orderData);
 
       await createOrder(orderData);
 

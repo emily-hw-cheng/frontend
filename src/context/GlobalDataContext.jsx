@@ -17,6 +17,7 @@ export function GlobalDataProvider({ children }) {
     { id: 8, name: 'Fruit Tart', price: 6.99, image: '/images/fruit_tart.png', description: 'A tart filled with fresh fruits.', dietaryRestrictions: 'Contains gluten, dairy, eggs' },
     { id: 9, name: 'Mango Smoothie', price: 4.99, image: '/images/mangoSmoothie.png', description: 'A tropical smoothie made with mangoes.', dietaryRestrictions: 'Vegan' },
     { id: 10, name: 'Tiramisu', price: 7.99, image: '/images/tiramisu.png', description: 'A classic Italian dessert with coffee flavor.', dietaryRestrictions: 'Contains gluten, dairy, eggs' },
+    { id: 11, name: 'Strawberry Smoothie', price: 4.99, image: '/images/strawberry_smoothie.png', description: 'A refreshing smoothie with fresh strawberries ', dietaryRestrictions: 'Contains gluten, dairy, eggs' },
   ]);
 
   // Initial data for supplies

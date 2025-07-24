@@ -38,7 +38,7 @@ export default function FranchiseLeaderboard() {
                   <h4>{franchise.name}</h4>
                   <p>Location: {franchise.location}</p>
                   {selectedFranchise && selectedFranchise.franchiseId === franchise.id && (
-                    <p>Top Dessert: {selectedFranchise.dessert} ({selectedFranchise.votes} votes)</p>
+                    <p>Top Dessert: {selectedFranchise.dessert} </p>
                   )}
                 </div>
               </Popup>
